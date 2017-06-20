@@ -1,0 +1,9 @@
+---
+layout: default
+---
+<h2>
+  <a class="post-link" href="{{ page.url | prepend: site.baseurl }}">{{ page.title }}</a>
+</h2>
+
+<p class="post-meta"><i>{{ page.date | date: "%b %-d, %Y" }}</i></p>
+{{ page.content }}

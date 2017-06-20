@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: post
 title: Use octicons in Angular
 date: '2017-06-19T16:28:00.001+02:00'
 author: Libor Nenadál

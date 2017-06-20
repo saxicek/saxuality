@@ -7,14 +7,13 @@ layout: default
   <ul class="post-list">
     <!-- This loops through the paginated posts -->
     {% for post in paginator.posts %}
-      <li>
-        <h2>
-          <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
-        </h2>
+      <h2>
+        <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
+      </h2>
 
-        <span class="post-meta">{{ post.date | date: "%b %-d, %Y" }}</span>
-        {{ post.content }}
-      </li>
+      <p class="post-meta"><i>{{ post.date | date: "%b %-d, %Y" }}</i></p>
+      {{ post.content }}
+      <hr />
     {% endfor %}
   </ul>
 
@@ -31,10 +30,6 @@ layout: default
     {% else %}
       <span class="next ">Next</span>
     {% endif %}
-  </div>
-
-  <div>
-    <p class="rss-subscribe">Subscribe <a href="{{ "/feed.xml" | prepend: site.baseurl }}">via RSS</a></p>
   </div>
 
 </div>
