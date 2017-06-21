@@ -4,18 +4,16 @@ layout: default
 
 <div class="home">
 
-  <ul class="post-list">
-    <!-- This loops through the paginated posts -->
-    {% for post in paginator.posts %}
-      <h2>
-        <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
-      </h2>
+  <!-- This loops through the paginated posts -->
+  {% for post in paginator.posts %}
+    <h2>
+      <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
+    </h2>
 
-      <p class="post-meta"><i>{{ post.date | date: "%b %-d, %Y" }}</i></p>
-      {{ post.content }}
-      <hr />
-    {% endfor %}
-  </ul>
+    <p class="post-meta"><i>{{ post.date | date: "%b %-d, %Y" }}</i></p>
+    {{ post.content }}
+    <hr />
+  {% endfor %}
 
   <!-- Pagination links -->
   <div class="pagination">
