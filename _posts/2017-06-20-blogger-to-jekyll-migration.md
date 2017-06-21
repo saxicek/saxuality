@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Blogger to Jekyll migration
+date: '2017-06-20T11:58:06.001+02:00'
 ---
 I thought this would be a simple task to do initially but things get complicated
 as you dig deeper - they always do.
