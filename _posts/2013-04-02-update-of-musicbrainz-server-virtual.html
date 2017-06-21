@@ -1,0 +1,14 @@
+---
+layout: post
+title: Update of MusicBrainz Server Virtual Machine
+date: '2013-04-02T23:18:00.001+02:00'
+author: Libor Nenadál
+tags:
+- MusicBrainz
+- virtual machine
+modified_time: '2013-11-01T17:56:19.418+01:00'
+blogger_id: tag:blogger.com,1999:blog-17453343.post-7426084848051967782
+blogger_orig_url: http://saxuality.blogspot.com/2013/04/update-of-musicbrainz-server-virtual.html
+---
+
+<div dir="ltr" style="text-align: left;" trbidi="on"><div dir="ltr" style="text-align: left;" trbidi="on">Musicbrainz provides VM image which can save you quite a lot of time that would be wasted when setting up the whole environment by yourself. Unfortunately the lates version is from 2012-10-15 and when you try to updated it using replication feature as described <a href="http://wiki.musicbrainz.org/MusicBrainz_Server/Setup">here</a> it takes ages. Better approach is to load the data from weekly dumps. Following are the steps you have to perform:<br /><ol style="text-align: left;"><li>(Optional) Make sure you have enough space. VM comes preconfigured with 2.5GB and 15GB disks which is not much. I extended them to 5GB and 20GB using <a href="http://gparted.sourceforge.net/download.php">GParted Live CD</a>.</li><li>Download the latest dump files from ftp://ftp.musicbrainz.org/pub/musicbrainz/data/fullexport/ preferably to /mnt/postgres/dumps which has more space available. <pre class="brush: text">sudo su -<br />mkdir /mnt/postgres/dumps<br />cd /mnt/postgres/dumps<br />wget ftp://ftp.musicbrainz.org/pub/musicbrainz/data/fullexport/20130330-003306/*</pre><b>Hint:</b> To save some space in VM just download files mbdump.tar.bz2 and mbdump-cdstubs.tar.bz2 </li><li>(Optional) Verify integrity of the files: <pre class="brush: text">pushd /mnt/postgres/dumps/ &amp;&amp; md5sum -c MD5SUMS &amp;&amp; popd</pre></li><li>As user musicbrainz drop existing database: <pre class="brush: text">dropdb musicbrainz_db</pre></li><li>And from ~/musicbrainz-server directory run the import script: <pre class="brush: text">carton exec ./admin/InitDb.pl -- --createdb --import /mnt/postgres/dumps/mbdump*.tar.bz2 --echo --tmp-dir=/mnt/postgres/tmp</pre></li></ol>Hope this helps.<br /><br /><b>EDIT:</b><br />Please note that recently Musicbrainz made changes in the schema so you may get errors when running replication script. Guide how to upgrade your DB schema is at Musicbrainz <a href="http://blog.musicbrainz.org/?p=1962">blog</a>.<b>&nbsp;</b> </div><script type="text/javascript">SyntaxHighlighter.highlight();</script></div>

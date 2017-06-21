@@ -1,0 +1,12 @@
+---
+layout: post
+title: CROSS JOIN in SQLAlchemy ORM
+date: '2013-06-11T15:39:00.003+02:00'
+author: Libor Nenadál
+tags: 
+modified_time: '2013-06-11T15:43:21.419+02:00'
+blogger_id: tag:blogger.com,1999:blog-17453343.post-5534452137412579522
+blogger_orig_url: http://saxuality.blogspot.com/2013/06/cross-join-in-sqlalchemy-orm.html
+---
+
+<div dir="ltr" style="text-align: left;" trbidi="on">SQLAlchemy has no direct support for CROSS JOIN. It took me quite some time to find the solution as Google does not provide very relevant results. <a href="https://groups.google.com/d/msg/sqlalchemy/3nW-yX1Dm5Q/osU0B1lzd9kJ">This</a> discussion helped me to find the solution in the end: <br /><br /><code>query(TableA, TableB, TableC).join(TableB,<b> literal(1) == 1</b>).outerjoin(TableC, and_(TableA.c_rel, TableB.c_rel))<br /></code><br />Example models situation where we have independent TableA and TableB (cross joined) and TableC represents M:N relation between TableA and TableB. Query implements following select statement:<br /><pre class="brush: sql">select a.*<br />      ,b.*<br />      ,c.*<br />  from table_a a<br /> cross join table_b b<br />  left outer join table_c c on c.table_a_id = a.id and c.table_b_id = b.id<br /></pre></div>

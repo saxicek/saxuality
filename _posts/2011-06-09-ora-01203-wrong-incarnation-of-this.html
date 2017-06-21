@@ -1,0 +1,15 @@
+---
+layout: post
+title: ! 'ORA-01203: wrong incarnation of this file - wrong creation SCN'
+date: '2011-06-09T21:32:00.004+02:00'
+author: Libor Nenadál
+tags:
+- database
+- ORA-01203
+- Oracle
+modified_time: '2013-04-16T19:44:12.259+02:00'
+blogger_id: tag:blogger.com,1999:blog-17453343.post-2936245522312479141
+blogger_orig_url: http://saxuality.blogspot.com/2011/06/ora-01203-wrong-incarnation-of-this.html
+---
+
+<div dir="ltr" style="text-align: left;" trbidi="on">I came to the problem that data file with tablespace ended up in broken state. But the tablespace has no crucial data for me so I decided just to remove it and keep on moving. Still to google it out took me some time so here is the short way how to do it:<br /><pre><code><br />[oracle@machine ~]$ sqlplus / as sysdba<br />SQL&gt; startup<br />ORACLE instance started.<br /><br />Total System Global Area 1603411968 bytes<br />Fixed Size                  2226912 bytes<br />Variable Size            1006634272 bytes<br />Database Buffers          587202560 bytes<br />Redo Buffers                7348224 bytes<br />Database mounted.<br />ORA-01122: database file 5 failed verification check<br />ORA-01110: data file 5: '/u01/tablespace/data01.dbf'<br />ORA-01203: wrong incarnation of this file - wrong creation SCN<br /><br />SQL&gt; shutdown<br />SQL&gt; startup mount<br />SQL&gt; alter database datafile '/u01/tablespace/data01.dbf' offline drop;<br />SQL&gt; shutdown<br />SQL&gt; startup<br />ORACLE instance started.<br /><br />Total System Global Area 1603411968 bytes<br />Fixed Size                  2226912 bytes<br />Variable Size            1006634272 bytes<br />Database Buffers          587202560 bytes<br />Redo Buffers                7348224 bytes<br />Database mounted.<br />Database opened.<br /></code></pre><br />Hurray!!!</div>

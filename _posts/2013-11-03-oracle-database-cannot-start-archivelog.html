@@ -1,0 +1,16 @@
+---
+layout: post
+title: Oracle database cannot start - archivelog is full
+date: '2013-11-03T18:24:00.000+01:00'
+author: Libor Nenadál
+tags:
+- database
+- archivelog
+- Oracle
+- ORA-03113
+modified_time: '2013-11-03T18:24:13.149+01:00'
+blogger_id: tag:blogger.com,1999:blog-17453343.post-510959227637474459
+blogger_orig_url: http://saxuality.blogspot.com/2013/11/oracle-database-cannot-start-archivelog.html
+---
+
+<div dir="ltr" style="text-align: left;" trbidi="on">As I am not Oracle DBA and I am performing maintenance tasks very infrequently I usually get stuck with even simple issues like that archive log is full and database cannot start.<br /><br />I bit misleading is also error raised during database startup: <code>ORA-03113: end-of-file on communication channel</code><br /><br />Real error cause can be found in the alert log:<br /><code>$ less /u01/app/oracle/diag/rdbms/orcl/orcl/alert/log.xml&nbsp;</code> <br /><br />Following steps can help:<br /><ol style="text-align: left;"><li>From sqlplus run command: <code>startup mount;</code></li><li>Delete archive logs using RMAN: <code>connect target sys/sys@orcl;</code> and then <code>delete archivelog all;</code></li><li>Finally just remount database from sqlplus: <code>shutdown;</code> and <code>startup;</code></li></ol></div>

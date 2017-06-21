@@ -1,0 +1,12 @@
+---
+layout: post
+title: Oracle interval formatting
+date: '2007-02-07T15:35:00.000+01:00'
+author: sax
+tags: 
+modified_time: '2007-02-07T16:17:49.150+01:00'
+blogger_id: tag:blogger.com,1999:blog-17453343.post-117086116452780108
+blogger_orig_url: http://saxuality.blogspot.com/2007/02/oracle-interval-formatting.html
+---
+
+Why interval formatting? I wanted to measure time elapsed. I saved start time, subtracted it from finish time and finally displayed it. Easy, huh?<br /><br />Well, not exactly. It's hard to believe, but if you subtract two dates in Oracle, you get DATE type (<span style="font-style: italic;">Oracle 10g SQL Reference, 2-28</span>). They probably got a good reason for such behavior, for me it's a mystery. And if you try to print it, you get some bloody number and you can't format it using to_char() function as you would expect (to be fair, the number ain't that bloody, it represents the interval in days but who wants to divide it to get hours, minutes and seconds?).<br /><br />Ok, but you read this for solution, right? Here we go:<br />Above mentioned documentation says that if you subtract <span style="font-weight: bold;">TIMESTAMP</span> types not DATE types, you get <span style="font-weight: bold;">INTERVAL</span>. And that's exactly what we need for some readable (still not well customizable) output.<br /><br />Example:<pre><br />SELECT CAST(<span style="font-weight: bold;">CAST</span>(to_date('03.01.2001 01:11:00',<br />                      'dd.mm.yyyy hh24:mi:ss') <span style="font-weight: bold;">AS TIMESTAMP</span>) -<br />            to_date('01.01.2001 01:04:31', 'dd.mm.yyyy hh24:mi:ss')<br />       AS INTERVAL DAY(0) TO SECOND(0))<br />  FROM dual;</pre>

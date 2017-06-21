@@ -1,0 +1,12 @@
+---
+layout: post
+title: Oracle database startup/shutdown scripts for Oracle Linux
+date: '2013-09-25T08:28:00.000+02:00'
+author: Libor Nenadál
+tags: 
+modified_time: '2013-09-25T08:30:29.795+02:00'
+blogger_id: tag:blogger.com,1999:blog-17453343.post-1849546928371929892
+blogger_orig_url: http://saxuality.blogspot.com/2013/09/oracle-database-startupshutdown-scripts.html
+---
+
+<div dir="ltr" style="text-align: left;" trbidi="on">There is nice tutorial <a href="http://www.oracle-base.com/articles/linux/automating-database-startup-and-shutdown-on-linux.php#oracle-11gr2-update">here</a> please follow it as it contains all the steps required. Only the script <i>dbora</i> can be improved a bit so here is my version:<br /><br /><pre class="brush: shell"><br />#!/bin/sh<br /># chkconfig: 345 99 10<br /># description: Oracle auto start-stop script.<br />#<br /># Set ORA_OWNER to the user id of the owner of the<br /># Oracle database software.<br /><br />ORA_OWNER=oracle<br /><br /># Source function library.<br />. /etc/init.d/functions<br /><br />orastatus() {<br />    status ora_pmon_lapshv<br />    RETVAL=$?<br />    status tnslsnr<br />    RETVAL2=$?<br />    if [ $RETVAL -ne 0 ] ; then<br />        return $RETVAL<br />    fi<br />    if [ $RETVAL2 -ne 0 ] ; then<br />        return $RETVAL2<br />    fi<br />}<br /><br />case "$1" in<br />    start)<br />        # Start the Oracle databases:<br />        # The following command assumes that the oracle login<br />        # will not prompt the user for any values<br />        su $ORA_OWNER -c "/home/oracle/scripts/startup.sh >> /home/oracle/scripts/startup_shutdown.log 2>&1"<br />        touch /var/lock/subsys/dbora<br />        ;;<br />    stop)<br />        # Stop the Oracle databases:<br />        # The following command assumes that the oracle login<br />        # will not prompt the user for any values<br />        su $ORA_OWNER -c "/home/oracle/scripts/shutdown.sh >> /home/oracle/scripts/startup_shutdown.log 2>&1"<br />        rm -f /var/lock/subsys/dbora<br />        ;;<br />    status)<br />        orastatus<br />        ;;<br />    *)<br />        echo $"Usage: $0 {start|stop|status}"<br />        exit 2<br />esac<br /></pre></div>

@@ -1,0 +1,12 @@
+---
+layout: post
+title: Enable remote RPC calls on Transmission (as used by Synology Download Station)
+date: '2013-06-09T00:58:00.004+02:00'
+author: Libor Nenadál
+tags: 
+modified_time: '2013-06-09T00:58:49.526+02:00'
+blogger_id: tag:blogger.com,1999:blog-17453343.post-2038335260886222739
+blogger_orig_url: http://saxuality.blogspot.com/2013/06/enable-remote-rpc-calls-on-transmission.html
+---
+
+<div dir="ltr" style="text-align: left;" trbidi="on">It is very simple:<br /><ol style="text-align: left;"><li>In <code>/usr/syno/etc/packages/DownloadStation/download/settings.json</code> edit item <br /><code>rpc-whitelist</code> to IP you have. For example: <code>"127.0.0.1,192.168.*.*"</code></li><li>Get pid of your Transmission:<br /> <code>ps w | grep transmission</code></li><li>Send request of re-read configuration:<br /> <code>kill -HUP <pid></pid></code></li></ol><code>&nbsp;</code><ol style="text-align: left;"></ol></div>

@@ -1,0 +1,18 @@
+---
+layout: post
+title: GWT, Netbeans, Persistence and MySQL
+date: '2008-05-16T17:43:00.003+02:00'
+author: sax
+tags:
+- persistence
+- Toplink
+- MySQL
+- GWT
+- Netbeans
+- java
+modified_time: '2008-05-16T17:59:24.777+02:00'
+blogger_id: tag:blogger.com,1999:blog-17453343.post-7044265868631029640
+blogger_orig_url: http://saxuality.blogspot.com/2008/05/gwt-netbeans-persistence-and-mysql.html
+---
+
+Today I played with <a href="http://code.google.com/webtoolkit/">GWT</a> and on the server side used JPA (Java Persistence API). As I'm developing my project using Netbeans platform, I just created new GWT project, added persistence and imported entity classes from MySQL database. As a persistence unit I used TopLink.<br />Now the problem raised when I deployed the project on the server: I got exceptions from TopLink - No persistence provider.<br />After some googling I finally found answer how to solve this:<br />copy mysql library (<code>mysql-connector-java-5.1.5-bin.jar</code>) to your Glassfish domain lib dir (<code>\glassfish-v2ur2\domains\domain1\lib\ext\</code>) and TopLink should stop complaining.

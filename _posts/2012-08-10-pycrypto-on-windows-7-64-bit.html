@@ -1,0 +1,18 @@
+---
+layout: post
+title: PyCrypto on Windows 7 64-bit
+date: '2012-08-10T20:25:00.000+02:00'
+author: Libor Nenadál
+tags:
+- easy_install
+- pip
+- PyCrypto
+- Windows
+- 64-bit
+- python
+modified_time: '2012-08-10T20:25:10.242+02:00'
+blogger_id: tag:blogger.com,1999:blog-17453343.post-748794523672869106
+blogger_orig_url: http://saxuality.blogspot.com/2012/08/pycrypto-on-windows-7-64-bit.html
+---
+
+<div dir="ltr" style="text-align: left;" trbidi="on">Today I am trying to make <a href="http://docs.fabfile.org/">Fabric</a> work so that I can automate my EC2 deployment.&nbsp;Unfortunately I am working on Windows 7 64-bit which is a bit pain for Python package management. Not everything works as it should. PyCrypto is one example. I should also note that I am using virtualenv but that is not too important for this case. So enough talking, how to make it work?<br /><br />Download egg from&nbsp;<a href="https://tahoe-lafs.org/source/tahoe-lafs/deps/tahoe-lafs-dep-eggs/">https://tahoe-lafs.org/source/tahoe-lafs/deps/tahoe-lafs-dep-eggs/</a>.<br />Install it using:<br /><pre class="brush: text">easy_install&nbsp;pycrypto-2.5-py2.7-win-amd64.egg</pre>Simple right? Big thanks goes to <a href="http://tahoe-lafs.org/">tahoe-lafs.org</a> for providing the binaries! <br /><br /></div>

@@ -1,0 +1,16 @@
+---
+layout: post
+title: Oracle startup / shutdown from command line
+date: '2009-05-06T14:26:00.004+02:00'
+author: Libor Nenadál
+tags:
+- database
+- instance
+- Oracle
+- command line
+modified_time: '2009-06-15T15:30:01.069+02:00'
+blogger_id: tag:blogger.com,1999:blog-17453343.post-3314061340602738360
+blogger_orig_url: http://saxuality.blogspot.com/2009/05/oracle-startup-shutdown-from-command.html
+---
+
+Today I played for a while with a script that starts and shuts Oracle database instance. I cannot handle this task using windows services as my setup does not start instance on service startup. The working solution for me is this:<br /><ul><br /><li>In the file sqlnet.ora set <code>SQLNET.AUTHENTICATION_SERVICES= (ALL)</code></li><br /><li>Create file <b>startup.sql</b> that contains:<br /><br /><code>startup;<br />exit</code></li><br /><li>Create file <b>shutdown.sql</b> that contains:<br /><br /><code>shutdown immediate;<br />exit</code></li><br /></ul><br />Finally to start database instance issue:<br /><code>set ORACLE_SID=<i>YOURSID</i><br />sqlplus / as sysdba @startup.sql<br /></code><br />And for shutdown:<br /><code>set ORACLE_SID=<i>YOURSID</i><br />sqlplus / as sysdba @shutdown.sql<br /></code><br /><b>EDIT:</b><br /><br>Because setting SQLNET.AUTHENTICATION_SERVICES= (ALL) in not always good (Enterprise Manager has problems with it or something) I was finally forced to use:<br /><code>@echo off<br />set ORACLE_SID=<i>YOURSID</i><br />sqlplus <i>LOGIN</i>/<i>PASSWORD</i> as sysdba @startup.sql</code><br><br />in startup.cmd and also similarly in shutdown.sql.

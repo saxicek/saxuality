@@ -1,0 +1,12 @@
+---
+layout: post
+title: SQLUnit and Oracle PL/SQL types
+date: '2007-08-14T14:57:00.000+02:00'
+author: sax
+tags: 
+modified_time: '2007-09-06T12:22:12.394+02:00'
+blogger_id: tag:blogger.com,1999:blog-17453343.post-196286159369511365
+blogger_orig_url: http://saxuality.blogspot.com/2007/08/sqlunit-and-oracle-plsql-types.html
+---
+
+I tried to use some automated testing framework for databases. Because I'm PL/SQL (Oracle) developer I have basically 2 options - <a href="http://dbunit.sourceforge.net/">DbUnit</a> or <a href="http://sqlunit.sourceforge.net/">SQLUnit</a>. I've chosen SQLUnit because it also provides framework for testing of functions and procedures, which is what I need to test above all.<br />And today I come to very disappointing conclusion (which has nothing to do with SQLUnit, it's matter of the whole concept):<br /><ol><li>PL/SQL package construction is not suitable for testing, because utility functions, that are placed in package body only, cannot be tested at all. You can put them to specification, but it makes them part of the interface - and I don't think it's a good idea.</li><li>PL/SQL types versus JDBC. So you decided that test of functions declared in specification will suffice and than I found out that I can't test functions / procedures that use PL/SQL types (BOOLEAN, PLS_INTEGER) because JDBC driver does not support them. (In fact that's something I could expect, but hey! That makes my set of test cases even smaller!)</li></ol>So I'm still far away from some kind of nice jUnit-like db testing. Wrote this just to warn you.

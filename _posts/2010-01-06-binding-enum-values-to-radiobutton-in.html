@@ -1,0 +1,16 @@
+---
+layout: post
+title: Binding enum values to JRadioButton in Java
+date: '2010-01-06T14:58:00.007+01:00'
+author: Libor Nenadál
+tags:
+- databinding
+- JRadioButton
+- Netbeans
+- java
+modified_time: '2013-04-16T19:53:46.530+02:00'
+blogger_id: tag:blogger.com,1999:blog-17453343.post-3882507500660918019
+blogger_orig_url: http://saxuality.blogspot.com/2010/01/binding-enum-values-to-radiobutton-in.html
+---
+
+I was stuck in binding values from enum to RadioButton in Netbeans. Lets say I have a bean: <pre class="brush: java"><br />public class ValueObject {<br />  public enum ValueEnum {<br />    FIRST_VALUE,<br />    SECOND_VALUE<br />  }<br /><br />  public ValueEnum value;<br />}<br /></pre>I want to create Swing RadioButtons where user can select one from these two enum values. As I use Netbeans as IDE I also like to do it using data binding, ie. bind radio buttons to {valueObject.value}.<br /><br />After asking at <a href="http://stackoverflow.com/questions/2012871/binding-enum-values-to-radiobutton-in-java">stackoverflow</a> I got a hint how to do that: Firstly create converter class that converts object to boolean and back. The converter is initialized with some object and if the value object in convert() call equals the initializer object then return true, false otherwise. <pre class="brush: java"><br />public class ObjectEqualityConverter extends Converter {<br /><br />    private Object o;<br /><br />    public ObjectEqualityConverter() {}<br /><br />    public ObjectEqualityConverter(Object o) {<br />        this.o = o;<br />    }<br /><br />    public Object convertForward(Object value) {<br />        return (o != null && o.equals(value)) ? Boolean.TRUE : Boolean.FALSE;<br />    }<br /><br />    public Object convertReverse(Object value) {<br />        return (Boolean.TRUE.equals(value)) ? o : null;<br />    }<br />}<br /></pre>After that you create converter instance for each JRadioButton and initialize it with the enum value the JRadioButton represents. Now you can bind JRadioButton directly to the bean value and in advanced binding properties just select the right converter. <script type="text/javascript">SyntaxHighlighter.highlight();</script>

@@ -1,0 +1,14 @@
+---
+layout: post
+title: Table row count in Oracle
+date: '2008-08-07T10:25:00.003+02:00'
+author: sax
+tags:
+- Oracle
+- PL/SQL
+modified_time: '2008-08-07T10:31:57.675+02:00'
+blogger_id: tag:blogger.com,1999:blog-17453343.post-650107837892443746
+blogger_orig_url: http://saxuality.blogspot.com/2008/08/table-row-count-in-oracle.html
+---
+
+You can get some row_count statistics directly from user_tables but they are not always accurate. So I wrote a script that counts number of lines.<br /><pre><br />DECLARE<br />  pl_count NUMBER;<br />BEGIN<br />  FOR rec IN (SELECT table_name FROM user_tables ORDER BY table_name) LOOP<br />    BEGIN<br />      EXECUTE IMMEDIATE 'select count(*) from ' || rec.table_name<br />        INTO pl_count;<br />      dbms_output.put_line(rec.table_name || ' ' || pl_count);<br />    EXCEPTION<br />      WHEN OTHERS THEN<br />        NULL;<br />    END;<br />  END LOOP;<br />END;<br />/<br /></pre><br /><span style="font-style:italic;">Note: Before running please consider your database size as the script can run very long if there is a large amount of data.</span>

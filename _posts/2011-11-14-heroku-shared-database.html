@@ -1,0 +1,15 @@
+---
+layout: post
+title: Heroku Shared Database
+date: '2011-11-14T23:23:00.001+01:00'
+author: Libor Nenadál
+tags:
+- Heroku
+- PostgreSQL
+- python
+modified_time: '2011-11-14T23:32:04.592+01:00'
+blogger_id: tag:blogger.com,1999:blog-17453343.post-4671365591295911728
+blogger_orig_url: http://saxuality.blogspot.com/2011/11/heroku-shared-database.html
+---
+
+<div dir="ltr" style="text-align: left;" trbidi="on">While developing my Python app on Heroku I tried to connect to the shared instance of PostgreSQL but I failed to get SHARED_DATABASE_URL from the environment (used "heroku config" for the check). Neither DATABASE_URL was defined. Asked on the IRC and got the answer - I have to add it first. Here is the magic spell: <br /><br /><code>heroku addons:add shared-database:5mb</code><br /><code>&nbsp;</code></div>

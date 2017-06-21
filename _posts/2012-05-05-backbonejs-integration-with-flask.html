@@ -1,0 +1,17 @@
+---
+layout: post
+title: Backbone.js integration with Flask
+date: '2012-05-05T23:04:00.000+02:00'
+author: Libor Nenadál
+tags:
+- backbone.js
+- Flask
+- jsonify
+- python
+- JSON
+modified_time: '2013-04-16T18:37:09.289+02:00'
+blogger_id: tag:blogger.com,1999:blog-17453343.post-8660292028969655108
+blogger_orig_url: http://saxuality.blogspot.com/2012/05/backbonejs-integration-with-flask.html
+---
+
+<div dir="ltr" style="text-align: left;" trbidi="on">When integrating Backbone.js with Flask on the server side, you soon realize that Flask jsonify() method for security reasons mentioned <a href="http://flask.pocoo.org/docs/security/#json-security">here</a> serializes collections as following:<br /><br /><pre class="brush: text">{<br />  "objects": [<br />    {<br />      "attr_1": 1,<br />      "attr_2": 2,<br />    },<br />    {<br />      "attr_1": 3,<br />      "attr_2": 4,<br />    }<br />  ]<br />}</pre><br />But Backbone by default expects collection to be serialized directly in the array:<br /><br /><pre class="brush: text">[<br />  {<br />    "attr_1": 1,<br />    "attr_2": 2,<br />  },<br />  {<br />    "attr_1": 3,<br />    "attr_2": 4,<br />  }<br />]</pre><br />Furtunatelly there is a easy way out - just implement the parse method of the collection:<br /><br /><pre class="brush: js">MyCollection = Backbone.Collection.extend({<br />    parse: function(resp, xhr) {<br />        return resp.objects;<br />    }<br />});<br /></pre><br /></div><script type="text/javascript">SyntaxHighlighter.highlight();</script>

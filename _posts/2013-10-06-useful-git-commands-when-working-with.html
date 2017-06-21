@@ -1,0 +1,12 @@
+---
+layout: post
+title: Useful git commands when working with Github
+date: '2013-10-06T13:10:00.004+02:00'
+author: Libor Nenadál
+tags:
+modified_time: '2013-10-06T18:25:54.355+02:00'
+blogger_id: tag:blogger.com,1999:blog-17453343.post-8318493536060444410
+blogger_orig_url: http://saxuality.blogspot.com/2013/10/useful-git-commands-when-working-with.html
+---
+
+<div dir="ltr" style="text-align: left;" trbidi="on">I am assuming that you already cloned some project using Github web. You should also configure your local repository to have 2 remotes:<br /><ol style="text-align: left;"><li>origin - this one is created by default and points to your cloned Github project</li><li>upstream - this one should point to development branch of the original project. Use following command:<br /><code class="plain">git remote add upstream https://github.com/midgetspy/Sick-Beard.git</code></li></ol><br />Following command will create branch in which you will be doing your changes. Newly created branch will be used in pull request later:<br /><code class="plain">git checkout -b your_branch_name upstream/development_branch</code><br /><br />Following command will push your changes to your Github cloned repository:<br /><code class="plain">git push -u origin your_branch_name</code><br /><br />And now you can create pull request using Github web from your branch to the original project. </div>

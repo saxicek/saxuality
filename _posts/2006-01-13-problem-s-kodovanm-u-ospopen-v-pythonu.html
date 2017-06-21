@@ -1,0 +1,12 @@
+---
+layout: post
+title: Problém s kódováním u os.popen v Pythonu
+date: '2006-01-13T16:33:00.000+01:00'
+author: sax
+tags: 
+modified_time: '2006-06-29T16:32:28.720+02:00'
+blogger_id: tag:blogger.com,1999:blog-17453343.post-113716686913727923
+blogger_orig_url: http://saxuality.blogspot.com/2006/01/problm-s-kdovnm-u-ospopen-v-pythonu.html
+---
+
+Tak jsem dneska zkoumal, jak je to s kódováním výstupu při volání popen v Pythonu. Ve Windows je výstup pro cmd shell nastaven do kódování cp852, jenže Python předpokládá cp1250, tak to pak kraví. Jako nejlepší řešení mi přišlo obalit os.popen do <strong>codecs.EncodedFile</strong>.<br />Příklad:<br />    <code>output = EncodedFile(os.popen(command), 'cp1250', 'cp852')</code>

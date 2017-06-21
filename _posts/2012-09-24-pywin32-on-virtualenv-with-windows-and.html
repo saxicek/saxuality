@@ -1,0 +1,17 @@
+---
+layout: post
+title: pywin32 on virtualenv with Windows and Python 64bit
+date: '2012-09-24T16:52:00.000+02:00'
+author: Libor Nenadál
+tags:
+- pywin32
+- Windows
+- 64-bit
+- python
+- virtualenv
+modified_time: '2012-09-24T16:52:11.766+02:00'
+blogger_id: tag:blogger.com,1999:blog-17453343.post-4394133094171990283
+blogger_orig_url: http://saxuality.blogspot.com/2012/09/pywin32-on-virtualenv-with-windows-and.html
+---
+
+<div dir="ltr" style="text-align: left;" trbidi="on">Windows 7 64bit + Python 2.7 64bit + virtualenv are suicidal combination. When installing Fab into such environment one of its dependencies is pywin32 (you will get ImportError: No module named win32com.shell.shell). With some googling you will find out that what is required is pywin32.<br /><br />So&nbsp;how to install pywin32?&nbsp;<code>easy_install pywin32</code> just fails. Ok, you can get the binaries from&nbsp;<a href="http://sourceforge.net/projects/pywin32/files/pywin32/">http://sourceforge.net/projects/pywin32/files/pywin32/</a>. But&nbsp;<code>easy_install pywin32-217.win-amd64-py2.7.exe</code> fails again!<br /><br />But if you examine the error it fails when resolving dependencies and trying to install pywin32 from sources. Not very nice. So here comes the <b>solution</b>:<br /><ol style="text-align: left;"><li>Get binaries from&nbsp; <a href="http://sourceforge.net/projects/pywin32/files/pywin32/">http://sourceforge.net/projects/pywin32/files/pywin32/</a></li><li>Run&nbsp;<code>easy_install -N pywin32-217.win-amd64-py2.7.exe</code>. The -N parameters instructs easy_install not to install dependencies. Great!</li></ol></div>

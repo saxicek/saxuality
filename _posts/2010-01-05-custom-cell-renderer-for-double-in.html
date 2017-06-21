@@ -1,0 +1,16 @@
+---
+layout: post
+title: Custom cell renderer for Double in JTable
+date: '2010-01-05T13:32:00.005+01:00'
+author: Libor Nenadál
+tags:
+- GUI
+- JTable
+- Netbeans
+- java
+modified_time: '2013-04-16T19:55:04.705+02:00'
+blogger_id: tag:blogger.com,1999:blog-17453343.post-1761930309475036481
+blogger_orig_url: http://saxuality.blogspot.com/2010/01/custom-cell-renderer-for-double-in.html
+---
+
+Today I found problem that the default cell renderer for Double type in JTable uses only 2 digits after decimal point (it is because it uses NumberFormat which is locale dependent). That is not sufficient for me. So I read JTable source and voila! - here is the class for custom renderer: <pre class="brush: java"><br />import javax.swing.JLabel;<br />import javax.swing.table.DefaultTableCellRenderer;<br /><br />public class CustomRenderer extends DefaultTableCellRenderer.UIResource {<br /><br />    public CustomRenderer() {<br />        super();<br />        setHorizontalAlignment(JLabel.RIGHT);<br />    }<br /><br />    public void setValue(Object value) {<br />        setText((value == null) ? "" : String.format("%f", (Double) value));<br />    }<br />}<br /></pre>

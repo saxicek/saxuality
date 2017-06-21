@@ -1,0 +1,13 @@
+---
+layout: post
+title: Oracle Designer - working directly with repository tables
+date: '2008-09-05T11:40:00.002+02:00'
+author: Libor Nenadál
+tags:
+- Oracle Designer
+modified_time: '2008-09-05T11:53:07.311+02:00'
+blogger_id: tag:blogger.com,1999:blog-17453343.post-5203282874327838822
+blogger_orig_url: http://saxuality.blogspot.com/2008/09/oracle-designer-working-directly-with.html
+---
+
+Today I needed to compare 2 application systems from Oracle Designer and as I got over 100 entities and don't like the embedded Java comparative tool I decided to compare it directly in the repository database. Good schema introduction is <a href="http://forums.oracle.com/forums/thread.jspa?messageID=2386897">here</a>. And here is my solution:<br /><ol><li>You need to set workarea context:<br /><pre>begin<br />  jr_context.set_workarea('GLOBAL SHARED WORKAREA');<br />end;<br />/<br /></pre></li><li>And then just compare entities from 2 applications:<br /><pre>WITH entity_system AS (<br />SELECT e.NAME entity<br />      ,s.NAME system<br />  FROM repadm.ci_entities e<br />  JOIN repadm.ci_app_sys_entities se ON se.entity_reference = e.id<br />  JOIN repadm.ci_application_systems s ON s.id = se.application_system_reference<br />)<br />SELECT t.entity<br />      ,t.system<br />      ,decode(t2.entity, t.entity, 'OK', 'missing')<br />  FROM entity_system t<br />  LEFT OUTER JOIN entity_system t2 ON t.entity = t2.entity<br />                                  AND t2.system = decode(t.system<br />                                                        ,'Application_1'<br />                                                        ,'Application_2'<br />                                                        ,'Application_1')<br /> WHERE t.system IN ('Application_1', 'Application_2');</pre></li></ol>

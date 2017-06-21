@@ -1,0 +1,16 @@
+---
+layout: post
+title: NTFS-3g in Etch
+date: '2008-03-08T21:51:00.003+01:00'
+author: sax
+tags:
+- AMD64
+- Debian
+- Etch
+- NTFS-3g
+modified_time: '2008-03-08T22:08:09.418+01:00'
+blogger_id: tag:blogger.com,1999:blog-17453343.post-4356132834766565336
+blogger_orig_url: http://saxuality.blogspot.com/2008/03/ntfs-3g-in-etch.html
+---
+
+Packages for NTFS-3g are currently in unstable branch so you can not install them directly. They also need newer version of libc6, which we don't want to upgrade. I've found some packages for Etch <a href="http://stylesen.org/installing_ntfs_3g_ntfs_read_write_in_debian_etch">here</a>, but they are not for AMD64. So I decided to compile them manually.<br /><br />You will need lic6-dev for compilation, if you don't have it, get it with command:<br /><code>apt-get install libc6-dev</code><br /><br />Also install dependencies:<br /><code>apt-get install fuse-utils libfuse2</code><br /><br />Then download sources from <a href="http://www.ntfs-3g.org/">http://www.ntfs-3g.org/</a>, untar them and compile them:<br /><code>./configure && make</code> and as a root <code>make install</code><br /><br />And that's it, mount your partition with command:<br /><code>mount -t ntfs-3g /dev/sda1 /mnt/Windows -o defaults,umask=0</code>

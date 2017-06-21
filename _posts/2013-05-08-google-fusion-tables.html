@@ -1,0 +1,16 @@
+---
+layout: post
+title: Google Fusion Tables
+date: '2013-05-08T10:10:00.001+02:00'
+author: Libor Nenadál
+tags:
+- technology
+- Google
+- Fusion Tables
+- opinions
+modified_time: '2013-05-08T10:10:14.622+02:00'
+blogger_id: tag:blogger.com,1999:blog-17453343.post-8376646931815359958
+blogger_orig_url: http://saxuality.blogspot.com/2013/05/google-fusion-tables.html
+---
+
+<div dir="ltr" style="text-align: left;" trbidi="on">I performed little testing of Google Fusion Tables today and while it is quite nice technology which allows very easy import of large data sets, it is still very immature. I tested with data from <a href="http://www.psp.cz/sqw/hp.sqw?k=1300">http://www.psp.cz/sqw/hp.sqw?k=1300</a> and found following issues:<br /><ol style="text-align: left;"><li>File names are restricted. When I tried to load *.unl file, it was refused with error than only CSV, TSV, ... extensions are allowed. I had to rename the files to CSV. </li><li>It is hard so set file encoding. The list of available encodings is too long and flows out of the page. As a workaround I converted files to UTF8 (were Windows-1250 originally).</li><li>When renaming columns I had to do it in 2 phases as I was not able to rename last column. Workaround is to rename all columns except the last one, save and then rename the last one.</li><li>Cannot merge several tables using different keys. That is quite an issue if you have non-trivial schema. The issue is logged in <a href="https://code.google.com/p/fusion-tables/issues/detail?id=766">https://code.google.com/p/fusion-tables/issues/detail?id=766</a> and hopefully it gets fixed soon as developer is assigned to it.</li></ol><b>Summary:</b> It is a nice technology but needs to be enhanced to be used to something more than just simple load and 2 tables merge. API access (which is supported but I have not tested it) could be used to nice mash ups.</div>

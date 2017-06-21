@@ -1,0 +1,12 @@
+---
+layout: post
+title: Oracle Database on VMware quickly
+date: '2013-03-08T12:08:00.000+01:00'
+author: Libor Nenadál
+tags: 
+modified_time: '2013-03-08T12:08:39.857+01:00'
+blogger_id: tag:blogger.com,1999:blog-17453343.post-1510252882292516102
+blogger_orig_url: http://saxuality.blogspot.com/2013/03/oracle-database-on-vmware-quickly.html
+---
+
+<div dir="ltr" style="text-align: left;" trbidi="on">It was never easy to install Oracle Database on Linux - too many steps to setup users, kernel parameters and all that stuff. Yesterday I tried again and now it seems things are moving forward. To get on the fast lane follow these steps:<br /><ol style="text-align: left;"><li>Install Oracle Linux. Download ISO image from Oracle and create new virtual machine. Let the VM have at least 16GB of disk space, otherwise you can have space issues.</li><li>Download Oracle Database installation files (<span style="font-family: &quot;Courier New&quot;,Courier,monospace;">linux_11gR2_database_1of2.zip</span> and <span style="font-family: &quot;Courier New&quot;,Courier,monospace;">linux_11gR2_database_2of2.zip</span>) to your VM - you can use <span style="font-family: &quot;Courier New&quot;,Courier,monospace;">/tmp</span> and extract them using unzip.</li><li><b>Install package oracle-rdbms-server-11gR2-preinstall</b> (<span style="font-family: &quot;Courier New&quot;,Courier,monospace;">yum install oracle-rdbms-server-11gR2-preinstall</span>). This does the real magic as it preconfigures everything for you.</li><li>Start the DB installation (<span style="font-family: &quot;Courier New&quot;,Courier,monospace;">/tmp/database/runInstaller</span>)</li></ol></div>

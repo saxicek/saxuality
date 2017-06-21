@@ -1,0 +1,12 @@
+---
+layout: post
+title: Simple port forwarding using iptables
+date: '2013-06-07T18:48:00.002+02:00'
+author: Libor Nenadál
+tags: 
+modified_time: '2015-08-18T16:40:36.366+02:00'
+blogger_id: tag:blogger.com,1999:blog-17453343.post-7579486586048867302
+blogger_orig_url: http://saxuality.blogspot.com/2013/06/simple-port-forwarding-using-iptables.html
+---
+
+<div dir="ltr" style="text-align: left;" trbidi="on">This post is for me so that I don't have to search Google. The example redirects calls to port 8690 to port 3690 where actual server sits. It also saves the configuration so it survives restart.<br /><br /><code># iptables -t nat -A PREROUTING -i eth0 -p tcp --dport 8690 -j REDIRECT --to-port 3690</code><br /><br /><code># /sbin/service iptables save</code><br /><br />To delete existing rule just replace -A parameter with -D. For example following command deletes forwarding set in previous example: <br /><br /><code># iptables -t nat -D PREROUTING -i eth0 -p tcp --dport 8690 -j REDIRECT --to-port 3690</code><br /><br /></div>

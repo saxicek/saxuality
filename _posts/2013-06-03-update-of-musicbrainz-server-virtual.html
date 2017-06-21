@@ -1,0 +1,14 @@
+---
+layout: post
+title: Update of MusicBrainz Server Virtual Machine II
+date: '2013-06-03T12:29:00.000+02:00'
+author: Libor Nenadál
+tags:
+- MusicBrainz
+- virtual machine
+modified_time: '2013-06-03T18:34:04.726+02:00'
+blogger_id: tag:blogger.com,1999:blog-17453343.post-6721982365943796529
+blogger_orig_url: http://saxuality.blogspot.com/2013/06/update-of-musicbrainz-server-virtual.html
+---
+
+<div dir="ltr" style="text-align: left;" trbidi="on">MusicBrains team released new server <a href="http://blog.musicbrainz.org/?p=1982">update</a>, but when I tried to update it on my virtual machine, I experienced few issues. Following steps should help you to overcome them:<br /><ol style="text-align: left;"><li>Enter the server root directory <code>cd /home/musicbrainz/musicbrainz-server</code></li><li>Switch to the new code with <code>git fetch origin</code> followed by <code>git checkout v-2013-05-28</code></li><li>If you try to run the server now (<code>carton exec -- plackup -Ilib -r</code>), you should be getting error <code>Error while loading app.psgi: Can't locate object method "SESSION_EXPIRE" via package "DBDefs" at lib/MusicBrainz/Server.pm line 46.</code> You have to edit your configuration (<code>lib/DBDefs.pm</code> and add line <code>use parent 'DBDefs::Default';</code> right after the <code>package DBDefs;</code> line. You can also diff your configuration with <code>lib/DBDefs.pm.sample</code> to see other changes.</li><li>Next issue is <code>Can't locate Math/Random/Secure.pm</code>. You have to manually add the dependency using <code>carton install Math::Random::Secure</code>.</li><li>Install Redis server as it is now required. <code>sudo apt-get install redis-server</code></li><li>Install GnuPG to make replication work: <code>carton install GnuPG</code></li></ol>Now you should be able to start the updated server version. </div>
