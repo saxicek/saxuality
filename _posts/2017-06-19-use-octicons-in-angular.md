@@ -33,9 +33,9 @@ copy&paste again. It is better to import the definition.
 You can import the package to your `*.ts` file and use innerHTML binding:
 
 ```typescript
-import octicons from 'octicons';
+import { calendar } from 'octicons';
 
-const calendarIcon = octicons.calendar.toSVG();
+const calendarIcon = calendar.toSVG();
 ```
 
 That gives you SVG element as string. But wait - when you bind it to the
@@ -56,9 +56,7 @@ export class MyComponent implements OnInit {
   constructor(private sanitizer: DomSanitizer) { }
 
   ngOnInit() {
-    this.calendarIcon = this.sanitizer.bypassSecurityTrustHtml(
-      octicons.calendar.toSVG()
-    );
+    this.calendarIcon = this.sanitizer.bypassSecurityTrustHtml(calendar.toSVG());
   }
 
 }
