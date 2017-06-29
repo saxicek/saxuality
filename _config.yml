@@ -23,6 +23,7 @@ twitter_username: saxicek
 github_username:  saxicek
 repository: saxicek/saxicek.github.io
 github: [metadata]
+google_analytics: UA-101853396-1
 
 # Build settings
 markdown: kramdown
