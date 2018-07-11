@@ -21,46 +21,48 @@ up live Ubuntu 16 from USB and perform copy there. Steps were as following:
 # In PC with Ubuntu
 
 1. Switch to root to avoid typing sudo for every command:
-
-    `sudo su -`
-
+   ```
+   sudo su -
+   ```
 2. Check connected disks:
-
-    `fdisk -l`
-
+   ```
+   fdisk -l
+   ```
 3. Update package information:
-
-    `sudo apt-get update`
-
+   ```
+   sudo apt-get update
+   ```
 4. Install mdadm:
-
-    `sudo apt-get install mdadm`
-
+   ```
+   sudo apt-get install mdadm
+   ```
 5. Check the automatically generated /etc/mdadm/mdadm.conf. In my case the 2
    disks were mapped to the same /dev/md/3 which caused errors later:
-
-    `vi /etc/mdadm/mdadm.conf`
-
+   ```
+   vi /etc/mdadm/mdadm.conf
+   ```
 6. Assemble software RAIDs:
-
-    `mdadm -As`
-
+   ```
+   mdadm -As
+   ```
 7. (optional) If the disks are using Synology Hybrid RAID (SHR):
-
-    `vgchange -ay`
+   ```
+   vgchange -ay
+   ```
 
 8. Mount disks:
   1. Basic RAIDs can be mounted using `/dev/md/*`:
-
-    `mount /dev/md/3 /mnt/new`
-
+     ```
+     mount /dev/md/3 /mnt/new`
+     ```
   2. SHR disk needs to mount volume group:
-
-    `mount /dev/vg1001/lv /mnt/old`
-
+     ```
+     mount /dev/vg1001/lv /mnt/old
+     ```
 9. Use rsync to copy files:
-
-    `rsync -aHAX --delete --info=progress2 /mnt/old/ /mnt/new/`
+   ```
+   rsync -aHAX --delete --info=progress2 /mnt/old/ /mnt/new/
+   ```
 
 This guide was inspired by:
 
