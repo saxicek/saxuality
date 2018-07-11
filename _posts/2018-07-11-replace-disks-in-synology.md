@@ -68,7 +68,7 @@ up live Ubuntu 16 from USB and perform copy there. Steps were as following:
    1. Basic RAIDs can be mounted using `/dev/md/*`:
 
       ```
-      mount /dev/md/3 /mnt/new`
+      mount /dev/md/3 /mnt/new
       ```
 
    2. SHR disk needs to mount volume group:
