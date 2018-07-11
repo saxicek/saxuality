@@ -65,17 +65,17 @@ up live Ubuntu 16 from USB and perform copy there. Steps were as following:
 
 8. Mount disks:
 
-  1. Basic RAIDs can be mounted using `/dev/md/*`:
+   1. Basic RAIDs can be mounted using `/dev/md/*`:
 
-     ```
-     mount /dev/md/3 /mnt/new`
-     ```
+      ```
+      mount /dev/md/3 /mnt/new`
+      ```
 
-  2. SHR disk needs to mount volume group:
+   2. SHR disk needs to mount volume group:
 
-     ```
-     mount /dev/vg1001/lv /mnt/old
-     ```
+      ```
+      mount /dev/vg1001/lv /mnt/old
+      ```
 
 9. Use rsync to copy files:
 
