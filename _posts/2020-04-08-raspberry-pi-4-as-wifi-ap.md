@@ -36,7 +36,7 @@ Connect the network ports. In this case, connect "eth0" to the bridge "br0".
 Now the interfaces file needs to be edited to adjust the various devices to work with bridging. Use `sudo nano /etc/network/interfaces` to add the bridging information at the end of the file.
 
     auto br0
-    iface br0 inet manual
+    iface br0 inet dhcp
         bridge_ports eth0 wlan0
         post-up iptables -A FORWARD -p all -i br0 -j ACCEPT
 
