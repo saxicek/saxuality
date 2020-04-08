@@ -74,6 +74,8 @@ Now unmask hostapd and reboot the Raspberry Pi
     sudo systemctl unmask hostapd
     sudo reboot
 
+Troubleshooting
+---------------
 If there are any errors in the hostapd.conf file the hostapd service may fail to start.
 In this case it can be helpful to start hostapd from the command line with the following command:
 
