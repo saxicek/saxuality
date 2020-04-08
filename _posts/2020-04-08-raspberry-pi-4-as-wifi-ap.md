@@ -81,4 +81,4 @@ In this case it can be helpful to start hostapd from the command line with the f
 
 Acknowlegments
 --------------
-This guide is based on forum post https://www.raspberrypi.org/forums/viewtopic.php?p=1510898&sid=c671765d5196511a8e72fc13e3fc2f96#p1510898 with some minor modifications.
+This guide is based on forum post <https://www.raspberrypi.org/forums/viewtopic.php?p=1510898&sid=c671765d5196511a8e72fc13e3fc2f96#p1510898> with some minor modifications.
